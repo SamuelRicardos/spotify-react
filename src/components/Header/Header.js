@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import smallRight from '../../assets/icons/small-right.png';
 import smallLeft from '../../assets/icons/small-left.png';
 import search from '../../assets/icons/search.png';
 
 const Header = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleInputChange = (event) => {
+      setSearchTerm(event.target.value);
+    };
+
     return (
         <nav className="header__navigation">
             <div className="navigation">
@@ -17,8 +23,12 @@ const Header = () => {
             </div>
             <div className="header__search">
                 <img src={search} alt="" />
-                <input id="search-input" maxlength="800" autocorrect="off" autocapitalize="off" spellcheck="false"
-                    placeholder="O que você quer ouvir?" value="" />
+                <input
+        type="text"
+        value={searchTerm}
+        onChange={handleInputChange}
+        placeholder="Pesquisar..."
+      />
             </div>
             <div className="header__login">
                 <button className="subscribe">Inscreva-se</button>
