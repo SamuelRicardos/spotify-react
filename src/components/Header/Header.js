@@ -10,11 +10,13 @@ const Header = ({ onSearchResults }) => {
 
     // Buscar artistas da API ao carregar o componente
     useEffect(() => {
-        fetch("http://localhost:5000/artists") // Certifique-se que o json-server está rodando
+         const url = `http://localhost:5000/artists?name_like=${searchTerm}`
+        fetch(url ) // Evita resposta do cache
             .then(response => response.json())
             .then(data => setArtists(data))
             .catch(error => console.error("Erro ao buscar artistas:", error));
-    }, []);
+    }, [searchTerm]);
+    
 
     // Função de pesquisa
     const handleInputChange = (event) => {
