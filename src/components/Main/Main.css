@@ -29,7 +29,7 @@
   /* SCROLL */
   .offer__scroll-container {
     max-height: 43vh;
-    margin: 24px;
+    margin: 5px;
     overflow-y: auto;
   }
   
@@ -46,15 +46,9 @@
     display: grid;
     justify-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 16px;
     gap: 16px;
     margin-bottom: 16px;
   
-    /* CODIGO COM JS CALCULANDO OS CARDS POR COLUNA */
-    display: grid;
-    gap: 16px;
-    grid-gap: 32px;
-    margin: 0 auto;
   }
   
   .cards {
