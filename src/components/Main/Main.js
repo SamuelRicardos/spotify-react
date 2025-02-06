@@ -1,5 +1,7 @@
 import React from "react";
 import "./Main.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 const Main = ({ artistResults }) => {
  
@@ -51,7 +53,7 @@ const Main = ({ artistResults }) => {
               <div className="card-img">
                 <img src={artist.urlImg} alt={artist.name} className="artist-img" />
                 <div className="play">
-                  <span className="fa fa-solid fa-play"></span>
+                  <span><FontAwesomeIcon icon={faPlay} /></span>
                 </div>
               </div>
               <div className="card-text">
