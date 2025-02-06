@@ -6,31 +6,18 @@ import search from "../../assets/icons/search.png";
 
 const Header = ({ onSearchResults }) => {
     const [searchTerm, setSearchTerm] = useState("");
-    const [artists, setArtists] = useState([]);
 
-    // Buscar artistas da API ao carregar o componente
     useEffect(() => {
-         const url = `http://localhost:5000/artists?name_like=${searchTerm}`
-        fetch(url ) // Evita resposta do cache
+        if (searchTerm.trim() === "") {
+            onSearchResults([]);
+            return;
+        }
+
+        fetch(`http://localhost:5000/artists?name_like=${searchTerm}`)
             .then(response => response.json())
-            .then(data => setArtists(data))
+            .then(data => onSearchResults(data))
             .catch(error => console.error("Erro ao buscar artistas:", error));
-    }, [searchTerm]);
-    
-
-    // Função de pesquisa
-    const handleInputChange = (event) => {
-        const term = event.target.value;
-        setSearchTerm(term);
-
-        // Filtrar artistas
-        const filteredArtists = artists.filter(artist =>
-            artist.name.toLowerCase().includes(term.toLowerCase())
-        );
-
-        // Passar os resultados filtrados para outro componente (Main.js, Foo.js, etc.)
-        onSearchResults(filteredArtists);
-    };
+    }, [searchTerm, onSearchResults]);
 
     return (
         <nav className="header__navigation">
@@ -47,7 +34,7 @@ const Header = ({ onSearchResults }) => {
                 <input
                     type="text"
                     value={searchTerm}
-                    onChange={handleInputChange}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Pesquisar artistas..."
                 />
             </div>

@@ -1,8 +1,8 @@
 import React from "react";
 import "./Main.css";
 
-const Main = ({ searchResults, artistResults }) => {
-  // Catálogos iniciais (amostras) para exibir para o usuário
+const Main = ({ artistResults }) => {
+ 
   const catalogos = [
     { name: "Boas festas", img: require("../../assets/playlist/1.jpeg") },
     { name: "Feitos para você", img: require("../../assets/playlist/2.png") },
@@ -23,18 +23,17 @@ const Main = ({ searchResults, artistResults }) => {
 
   return (
     <div className="playlist-container">
-      <div id="result-playlists">
+      <div id="result-playlists" className={artistResults.length > 0 ? "hidden" : ""}>
         <div className="playlist">
           <h1 id="greeting">Boas vindas</h1>
           <h2 className="session">Navegar por todas as seções</h2>
         </div>
 
-        {/* Exibindo os catálogos iniciais como amostras */}
         <div className="offer__scroll-container">
           <h2>Catálogos em Destaque</h2>
           <div className="offer__list-item">
             {catalogos.map((catalogo, index) => (
-              <a href="" key={index} className="cards">
+              <a href="#" key={index} className="cards">
                 <div className={`cards card${index + 1}`}>
                   <img src={catalogo.img} alt={catalogo.name} />
                   <span>{catalogo.name}</span>
@@ -43,23 +42,26 @@ const Main = ({ searchResults, artistResults }) => {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Exibição dos artistas pesquisados */}
-        {artistResults && artistResults.length > 0 && (
-          <div className="offer__scroll-container">
-            <h2>Artistas Encontrados</h2>
-            <div className="offer__list-item">
-              {artistResults.map((artist, index) => (
-                <a href="" key={index} className="cards">
-                  <div className={`cards card${index + 1}`}>
-                    <img src={artist.image} alt={artist.name} />
-                    <span>{artist.name}</span>
-                  </div>
-                </a>
-              ))}
+      <div id="result-artist" className={artistResults.length > 0 ? "" : "hidden"}>
+        <div className="grid-container">
+          {artistResults.map((artist, index) => (
+            <div className="artist-card" key={index}>
+              <div className="card-img">
+                <img src={artist.urlImg} alt={artist.name} className="artist-img" />
+                <div className="play">
+                  <span className="fa fa-solid fa-play"></span>
+                </div>
+              </div>
+              <div className="card-text">
+                <a href="#" className="vst" title={artist.name}></a>
+                <span className="artist-name">{artist.name}</span>
+                <span className="artist-categorie">Artista</span>
+              </div>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
       </div>
     </div>
   );

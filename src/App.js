@@ -8,16 +8,17 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]); // Estado para armazenar os resultados da pesquisa
+  const [searchResults, setSearchResults] = useState([]);
 
   return (
     <div>
       <Sidebar />
       <Header onSearchResults={setSearchResults} />
-      <Main searchResults={searchResults} />
+      <Main artistResults={searchResults} />
       <Footer />
     </div>
   );
 }
+
 
 export default App;
