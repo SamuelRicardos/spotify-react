@@ -8,15 +8,24 @@ const Header = ({ onSearchResults }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+
         if (searchTerm.trim() === "") {
             onSearchResults([]);
             return;
         }
 
-        fetch(`http://localhost:5000/artists?name_like=${searchTerm}`)
+        fetch(`http://localhost:5000/artists?name_like=${searchTerm}`, { signal })
             .then(response => response.json())
             .then(data => onSearchResults(data))
-            .catch(error => console.error("Erro ao buscar artistas:", error));
+            .catch(error => {
+                if (error.name !== "AbortError") {
+                    console.error("Erro ao buscar artistas:", error);
+                }
+            });
+
+        return () => controller.abort();
     }, [searchTerm, onSearchResults]);
 
     return (
