@@ -32,7 +32,6 @@ const Main = ({ artistResults }) => {
         </div>
 
         <div className="offer__scroll-container">
-          <h2>Catálogos em Destaque</h2>
           <div className="offer__list-item">
             {catalogos.map((catalogo, index) => (
               <a href="#" key={index} className="cards">
